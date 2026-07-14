@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "seed": 7,
+  "proxies": [
+    {
+      "name": "cdn",
+      "listen": "127.0.0.1:18090",
+      "upstream": "http://127.0.0.1:18091",
+      "rules": [
+        {
+          "name": "base-latency",
+          "fault": {"delay_ms": 80, "jitter_ms": 40}
+        },
+        {
+          "name": "dialup-downloads",
+          "match": {"methods": ["GET"], "path": "/assets/**"},
+          "fault": {"throttle_bps": 16384}
+        }
+      ]
+    }
+  ]
+}

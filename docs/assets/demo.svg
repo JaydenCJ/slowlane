@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="470" viewBox="0 0 720 470" font-family="Menlo, Consolas, monospace" font-size="14">
+  <rect width="720" height="470" rx="10" fill="#101418"/>
+  <circle cx="24" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="22" r="6" fill="#27c93f"/>
+  <text x="360" y="27" fill="#8b949e" text-anchor="middle" font-size="12">slowlane — the plan is the runtime</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="62"><tspan fill="#7ee787">$</tspan> slowlane plan --from 10 --requests 4 examples/flaky-upstream.json</text>
+    <text x="24" y="88"><tspan fill="#79c0ff">plan:</tspan> proxy "api" seed 42 — GET /, requests 10-13</text>
+    <text x="24" y="114" fill="#d2a8ff">  req  action</text>
+    <text x="24" y="136">   10  pass</text>
+    <text x="24" y="158">   11  <tspan fill="#f778ba">503 (brownout)</tspan></text>
+    <text x="24" y="180">   12  pass</text>
+    <text x="24" y="202">   13  <tspan fill="#f778ba">503 (brownout)</tspan></text>
+    <text x="24" y="240"><tspan fill="#7ee787">$</tspan> slowlane run examples/flaky-upstream.json</text>
+    <text x="24" y="266" fill="#8b949e">proxy api listening on 127.0.0.1:18080 -&gt; http://127.0.0.1:18081</text>
+    <text x="24" y="292">api #10 GET /users/10 [pass] -&gt; <tspan fill="#7ee787">200</tspan></text>
+    <text x="24" y="314">api #11 GET /users/11 [<tspan fill="#f778ba">503 (brownout)</tspan>] -&gt; <tspan fill="#f778ba">503</tspan></text>
+    <text x="24" y="336">api #12 GET /users/12 [pass] -&gt; <tspan fill="#7ee787">200</tspan></text>
+    <text x="24" y="358">api #13 GET /users/13 [<tspan fill="#f778ba">503 (brownout)</tspan>] -&gt; <tspan fill="#f778ba">503</tspan></text>
+    <text x="24" y="396" fill="#8b949e">same seed, same counters — the live faults land exactly where</text>
+    <text x="24" y="418" fill="#8b949e">the plan said, across restarts, machines, and CI runs.</text>
+    <text x="24" y="448" fill="#d2a8ff">no control plane · no client SDK · one static binary · zero deps</text>
+  </g>
+</svg>

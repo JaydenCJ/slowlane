@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "seed": 42,
+  "proxies": [
+    {
+      "name": "api",
+      "listen": "127.0.0.1:18080",
+      "upstream": "http://127.0.0.1:18081",
+      "rules": [
+        {
+          "name": "slow-writes",
+          "match": {"methods": ["POST", "PUT"], "path": "/api/**"},
+          "fault": {"delay_ms": 150, "jitter_ms": 100}
+        },
+        {
+          "name": "brownout",
+          "window": {"from": 11, "to": 30},
+          "rate": 0.5,
+          "fault": {"status": 503, "body": "injected outage"}
+        },
+        {
+          "name": "dropped-conn",
+          "window": {"from": 31, "every": 10},
+          "fault": {"drop": true}
+        }
+      ]
+    }
+  ]
+}
